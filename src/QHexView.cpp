@@ -147,14 +147,14 @@ void QHexView::paintEvent(QPaintEvent *event)
                                        (static_cast<std::size_t>(lastLineIdx) - static_cast<std::size_t>(firstLineIdx)) * BYTES_PER_LINE);
 
     bool selected = false;
-    for (int lineIdx = firstLineIdx, yPos = yPosStart;  lineIdx < lastLineIdx; lineIdx += 1, yPos += m_charHeight)
+    for (int lineIdx = firstLineIdx, yPos = yPosStart;  lineIdx < lastLineIdx; lineIdx += 1, yPos += static_cast<int>(m_charHeight))
     {
         painter.setPen(addressPenColor);
         QString address = QString("%1").arg(lineIdx * 16, 10, 16, QChar('0'));
         painter.drawText(static_cast<int>(m_posAddr), yPos, address);
 
         painter.setPen(textPenColor);
-        for(int xPos = static_cast<int>(m_posHex), i=0; i<BYTES_PER_LINE && ((lineIdx - firstLineIdx) * BYTES_PER_LINE + i) < data.size(); i++, xPos += 3 * m_charWidth)
+        for(int xPos = static_cast<int>(m_posHex), i=0; i<BYTES_PER_LINE && ((lineIdx - firstLineIdx) * BYTES_PER_LINE + i) < data.size(); i++, xPos += 3 * static_cast<int>(m_charWidth))
         {
             auto changeNormal = [&]()
             {
@@ -220,7 +220,7 @@ void QHexView::paintEvent(QPaintEvent *event)
             }
         }
 
-        for (int xPosAscii = static_cast<int>(m_posAscii), i=0; ((lineIdx - firstLineIdx) * BYTES_PER_LINE + i) < data.size() && (i < BYTES_PER_LINE); i++, xPosAscii += m_charWidth)
+        for (int xPosAscii = static_cast<int>(m_posAscii), i=0; ((lineIdx - firstLineIdx) * BYTES_PER_LINE + i) < data.size() && (i < BYTES_PER_LINE); i++, xPosAscii += static_cast<int>(m_charWidth))
         {
             char ch = data[(lineIdx - firstLineIdx) * BYTES_PER_LINE + i];
             if ((ch < 0x20) || (ch > 0x7e))
