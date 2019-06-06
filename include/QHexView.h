@@ -1,4 +1,4 @@
-#ifndef Q_HEX_VIEWER_H_
+﻿#ifndef Q_HEX_VIEWER_H_
 #define Q_HEX_VIEWER_H_
 
 #include <QAbstractScrollArea>
@@ -12,7 +12,7 @@ class QHexView: public QAbstractScrollArea
 		class DataStorage
 		{
 			public:
-                virtual ~DataStorage() {}
+                virtual ~DataStorage() = default;
 				virtual QByteArray getData(std::size_t position, std::size_t length) = 0;
 				virtual std::size_t size() = 0;
 		};
@@ -40,7 +40,7 @@ class QHexView: public QAbstractScrollArea
 
 
 
-		QHexView(QWidget *parent = 0);
+        QHexView(QWidget *parent = Q_NULLPTR);
 		~QHexView();
 
         void setFont(const QFont& font);
