@@ -37,7 +37,7 @@ void QHexView::setFont(const QFont& font)
 {
     QAbstractScrollArea::setFont(font);
 
-    m_charWidth = static_cast<std::size_t>(fontMetrics().width(QLatin1Char('9')));
+    m_charWidth = static_cast<std::size_t>(fontMetrics().horizontalAdvance(QLatin1Char('9')));
     m_charHeight = static_cast<std::size_t>(fontMetrics().height());
 
     m_posAddr = 0;
